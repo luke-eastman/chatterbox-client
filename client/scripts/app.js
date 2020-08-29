@@ -12,13 +12,9 @@ var App = {
     MessagesView.initialize();
     FormView.setStatus(false);
 
-    // Fetch initial batch of messages
-    // App.startSpinner();
-    // App.fetch(App.stopSpinner);
-
-    $('.username').on('click', function(event) {
-      Friends.toggleStatus($(event.target).text());// Mel Brooks
-    });
+    //Fetch initial batch of messages
+    App.startSpinner();
+    App.fetch(App.stopSpinner);
 
     $('.addRoom').on('click', function(event) {
       var roomName = prompt('Enter a new room name:');
@@ -34,6 +30,13 @@ var App = {
     Parse.readAll((data) => {
       // examine the response from the server request:
       console.log(data);
+      for (var message of data.results) {
+        var text = encodeURIComponent(message.text);
+        var username = encodeURIComponent(message.username);
+        var roomname = encodeURIComponent(message.roomname);
+        var id = encodeURIComponent(message.objectId);
+        Messages.addMessage(id, username, roomname, text);
+      }
 
       callback();
     });

@@ -1,9 +1,13 @@
 var Messages = {
 
-  'Mel Brooks': {
-    username: 'Mel Brooks',
-    text: 'Never underestimate the power of the Schwartz!',
-    roomname: 'lobby'
+  storage: {
+  },
+  addMessage: function(id, username, roomName, text) {
+    Messages.storage[id] = {
+      username: username,
+      roomname: roomName,
+      text: text
+    };
   }
 
 };

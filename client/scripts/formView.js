@@ -9,16 +9,21 @@ var FormView = {
   handleSubmit: function(event) {
     // Stop the browser from submitting the form
     event.preventDefault();
-    var encodedMessage = encodeURIComponent($('input#message').val());
+    var encodedMessage = $('input#message').val();
     var message = {
       username: App.username,
       text: encodedMessage,
       room: 'lobby'
     };
+    Parse.create(message);
+    // remove all chat items from DOM
+    $(chats).empty();
+    // get the new messages
+    // App.fetch will add all messages to storage
+    App.fetch(MessagesView.render);
 
     console.log('click!');
-    Parse.create(message, App.stopSpinner());
-    App.startSpinner();
+    // App.startSpinner();
   },
 
   setStatus: function(active) {
