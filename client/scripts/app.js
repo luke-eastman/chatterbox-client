@@ -15,6 +15,10 @@ var App = {
     App.startSpinner();
     App.fetch(App.stopSpinner);
 
+    $('.username').on('click', function(event) {
+      Friends.toggleStatus($(event.target).text());// Mel Brooks
+    });
+
   },
 
   fetch: function(callback = ()=>{}) {
