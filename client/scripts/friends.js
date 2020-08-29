@@ -6,6 +6,5 @@ var Friends = {
     } else {
       Friends.storage[username] = false;
     }
-
   }
 };

@@ -10,10 +10,11 @@ var App = {
     FormView.initialize();
     RoomsView.initialize();
     MessagesView.initialize();
+    FormView.setStatus(false);
 
     // Fetch initial batch of messages
-    App.startSpinner();
-    App.fetch(App.stopSpinner);
+    // App.startSpinner();
+    // App.fetch(App.stopSpinner);
 
     $('.username').on('click', function(event) {
       Friends.toggleStatus($(event.target).text());// Mel Brooks
@@ -24,9 +25,12 @@ var App = {
       Rooms.add(roomName);
     });
 
+    $('.submit').on('click', function(event) {
+      FormView.handleSubmit(event);
+    });
   },
 
-  fetch: function(callback = ()=>{}) {
+  fetch: function(callback = ()=>{} ) {
     Parse.readAll((data) => {
       // examine the response from the server request:
       console.log(data);
