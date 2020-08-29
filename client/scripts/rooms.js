@@ -2,7 +2,7 @@ var Rooms = {
   storage: {},
 
   add: function(roomName) {
-    Rooms.storage[roomName] = roomName;
+    Rooms.storage[roomName] = {'name': roomName};
   }
 
 

@@ -5,16 +5,22 @@ var MessagesView = {
   initialize: function() {
     // TODO: determine what it does
 
-    //MessagesView.render();
   },
 
-  render: function() {
-    for (var message in Messages.storage) {
-      MessagesView.renderMessage(Messages.storage[message]);
+  render: function(room = undefined) {
+    if (room === undefined) {
+      for (var message in Messages.storage) {
+        MessagesView.renderMessage(Messages.storage[message]);
+      }
+    } else {
+      for (var message in Messages.storage) {
+        if (Messages.storage[message].roomname === room) {
+          MessagesView.renderMessage(Messages.storage[message]);
+        }
+      }
     }
 
     $('.username').on('click', function(event) {
-      console.log(event);
       Friends.toggleStatus($(event.target).text());// Mel Brooks
     });
 

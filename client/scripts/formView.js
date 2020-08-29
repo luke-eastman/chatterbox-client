@@ -4,6 +4,7 @@ var FormView = {
 
   initialize: function() {
     FormView.$form.on('submit', FormView.handleSubmit);
+    MessagesView.render(App.roomName);
   },
 
   handleSubmit: function(event) {
@@ -13,7 +14,7 @@ var FormView = {
     var message = {
       username: App.username,
       text: encodedMessage,
-      room: 'lobby'
+      room: App.roomName
     };
     Parse.create(message);
     // remove all chat items from DOM

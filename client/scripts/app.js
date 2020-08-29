@@ -6,7 +6,7 @@ var App = {
 
   initialize: function() {
     App.username = window.location.search.substr(10);
-
+    App.roomName = 'lobby';
     FormView.initialize();
     RoomsView.initialize();
     MessagesView.initialize();
@@ -14,7 +14,10 @@ var App = {
 
     //Fetch initial batch of messages
     App.startSpinner();
-    App.fetch(App.stopSpinner);
+    App.fetch(function() {
+      MessagesView.render(App.roomName);
+      App.stopSpinner();
+    });
 
     $('.addRoom').on('click', function(event) {
       var roomName = prompt('Enter a new room name:');
@@ -23,6 +26,10 @@ var App = {
 
     $('.submit').on('click', function(event) {
       FormView.handleSubmit(event);
+    });
+    RoomsView.$select.on('change', function(event) {
+      App.roomName = this.value;
+      RoomsView.render(this.value);
     });
   },
 
@@ -36,6 +43,13 @@ var App = {
         var roomname = encodeURIComponent(message.roomname);
         var id = encodeURIComponent(message.objectId);
         Messages.addMessage(id, username, roomname, text);
+        Rooms.add(roomname);
+      }
+
+      //loop over rooms storage
+      //for each room renderRoom()
+      for (var room in Rooms.storage) {
+        RoomsView.renderRoom(Rooms.storage[room]);
       }
 
       callback();
