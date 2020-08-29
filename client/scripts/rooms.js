@@ -1,5 +1,9 @@
 var Rooms = {
-  room: {
-    'name': 'lobby'
+  storage: {},
+
+  add: function(roomName) {
+    Rooms.storage[roomName] = roomName;
   }
+
+
 };

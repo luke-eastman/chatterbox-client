@@ -19,6 +19,11 @@ var App = {
       Friends.toggleStatus($(event.target).text());// Mel Brooks
     });
 
+    $('.addRoom').on('click', function(event) {
+      var roomName = prompt('Enter a new room name:');
+      Rooms.add(roomName);
+    });
+
   },
 
   fetch: function(callback = ()=>{}) {
