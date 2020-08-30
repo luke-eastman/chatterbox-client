@@ -22,6 +22,8 @@ var App = {
     $('.addRoom').on('click', function(event) {
       var roomName = prompt('Enter a new room name:');
       Rooms.add(roomName);
+      RoomsView.renderRoom(Rooms.storage[roomName]);
+      RoomsView.render(roomName);
     });
 
     $('.submit').on('click', function(event) {
